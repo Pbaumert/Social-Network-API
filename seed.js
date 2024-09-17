@@ -2,10 +2,12 @@ const mongoose = require('mongoose');
 const { User, Thought } = require('./models');
 
 mongoose.connect('mongodb://127.0.0.1:27017/socialNetworkDB');
+
 const seedDatabase = async () => {
   await User.deleteMany({});
   await Thought.deleteMany({});
 
+  // Create users first
   const users = await User.insertMany([
     {
       username: 'spaghetti_monster',
@@ -25,10 +27,12 @@ const seedDatabase = async () => {
     }
   ]);
 
+  // Create thoughts associated with userIds
   const thoughts = await Thought.insertMany([
     {
       thoughtText: "I'm pretty sure my fridge is running... time to catch it.",
       username: 'spaghetti_monster',
+      userId: users[0]._id, // Assign userId
       reactions: [
         {
           reactionBody: "You'd better run faster!",
@@ -39,6 +43,7 @@ const seedDatabase = async () => {
     {
       thoughtText: "Why don't skeletons fight each other? They don’t have the guts!",
       username: 'nacho_king',
+      userId: users[2]._id, 
       reactions: [
         {
           reactionBody: "Bones to pick, they have not.",
@@ -49,6 +54,7 @@ const seedDatabase = async () => {
     {
       thoughtText: "I tried to eat a clock... it was time-consuming.",
       username: 'darth_vapour',
+      userId: users[1]._id, 
       reactions: [
         {
           reactionBody: "Tick-tock, tick-tock... did you eat the minutes too?",
@@ -59,6 +65,7 @@ const seedDatabase = async () => {
     {
       thoughtText: "Do or do not... there is no try, but also no coffee.",
       username: 'yoda_speak',
+      userId: users[3]._id, 
       reactions: [
         {
           reactionBody: "I’m going to brew it now.",
@@ -73,3 +80,4 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
+
