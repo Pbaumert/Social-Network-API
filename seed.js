@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 const { User, Thought } = require('./models');
 
-mongoose.connect('mongodb://127.0.0.1:27017/socialNetworkDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
+mongoose.connect('mongodb://127.0.0.1:27017/socialNetworkDB');
 const seedDatabase = async () => {
   await User.deleteMany({});
   await Thought.deleteMany({});
