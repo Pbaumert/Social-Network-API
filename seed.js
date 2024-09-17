@@ -68,7 +68,7 @@ const seedDatabase = async () => {
     }
   ]);
 
-  console.log('Database seeded with creative data!');
+  console.log('Database seeded with data!');
   mongoose.connection.close();
 };
 
